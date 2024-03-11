@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--Nome: Artur    turma 3-i
+    Nome: João 
+    Nome: Marcos  
+    Nome: Pablo --> 
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador de Números Primos</title>
+    <style>
+        input[type="number"] {
+            margin-bottom: 10px;
+        }
+        canvas {
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Descubra se é Primo!</h1>
+    <input type="number" id="num" name="num" placeholder="Insira um número natural">
+    <button onclick="verificarPrimo()">Verificar</button>
+    <canvas id="resultadoCanvas" width="400" height="50"></canvas>
+
+    <script>
+        function verificarPrimo() {
+            var num = parseInt(document.getElementById('num').value, 10);
+            var canvas = document.getElementById('resultadoCanvas');
+            var ctx = canvas.getContext('2d');
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            if (num <= 1) {
+                desenharMensagem('O número ' + num + ' não é primo');
+            } else if (num === 2) {
+                desenharMensagem('O número ' + num + ' é primo');
+            } else {
+                var isPrimo = true;
+                for (var i = 2; i <= Math.sqrt(num); i++) {
+                    if (num % i === 0) {
+                        isPrimo = false;
+                        break;
+                    }
+                }
+                if (isPrimo) {
+                    desenharMensagem('O número ' + num + ' é primo');
+                } else {
+                    desenharMensagem('O número ' + num + ' não é primo');
+                }
+            }
+        }
+        function desenharMensagem(mensagem) {
+            var canvas = document.getElementById('resultadoCanvas');
+            var ctx = canvas.getContext('2d');
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = '20px Arial';
+            ctx.fillText(mensagem, 10, 30);
+        }
+    </script>
+</body>
+</html>
